@@ -1,14 +1,14 @@
 import Lab1 from "./Lab1"
 import Lab2 from "./Lab2"
 import Lab3 from "./Lab3"
-import teslaBot from '../images/teslabot.jpg'
+import { Route, Routes, Navigate } from "react-router";
+
 
 
 export default function Labs(){
     return (
         <div>
-            <h1>Labs</h1>
-            <Lab1 />
+
   <h4>Paragraph Tag</h4>
     <p>
     This is the first paragraph. The paragraph tag is used to format
@@ -157,7 +157,7 @@ tag to tell browsers to render the gaps.
 
         loading a local image: 
         <br />
-        <img id = "wd-teslabot" src= {teslaBot} height= "200px" />
+        <img id = "wd-teslabot" src= "images/teslabot.jpg" height= "200px" />
 
         <input type ="text"
         placeholder ="hint"
@@ -292,12 +292,6 @@ to get dummy text<br/>
 Please 
 <a id="git repo" href="https://github.com/KiswaK/Kanbas-react-web-app"> click here</a>
 to see the repository<br/>
-
-
-
-
-
-
 
 
 
