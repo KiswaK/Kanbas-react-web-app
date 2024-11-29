@@ -2,10 +2,13 @@ import Labs from "./Labs";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import Kanbas from "./Kanbas";
 import TOC from "./Labs/TOC";
+import store from "./Kanbas/store";
+import { Provider } from "react-redux";
 
 export default function App() {
   return (
     <HashRouter>
+         <Provider store={store}>
       <div>
         <Routes>
           <Route path="/" element= {<Navigate to="TOC" />} />
@@ -14,6 +17,7 @@ export default function App() {
           <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
       </div>
+      </Provider>
     </HashRouter>
   );
 }
