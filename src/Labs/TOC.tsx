@@ -1,4 +1,6 @@
+import path from "path";
 import { useLocation } from "react-router";
+
 export default function TOC() {
   const { pathname } = useLocation();
   return (
@@ -27,12 +29,18 @@ export default function TOC() {
         </a>
       </li>
       <li className="nav-item">
-        <a id="wd-k" href="#/Kanbas" className="nav-link">
-          Kanbas
+        <a id="wd-a3" href="#/Labs/Lab4"
+          className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}>
+          Lab 4
         </a>
       </li>
       <li className="nav-item">
-        <a id="wd-k" href="https://github.com/jannunzi" className="nav-link">
+        <a id="wd-k" href="#/Kanbas" className="nav-link">
+          Kanbas
+        </a>
+      </li> 
+      <li className="nav-item">
+        <a id="wd-k" href="https://github.com/KiswaK" className="nav-link">
           My GitHub
         </a>
       </li>
