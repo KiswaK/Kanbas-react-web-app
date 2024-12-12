@@ -1,15 +1,15 @@
 import { FaSearch, FaPlus, FaChevronCircleDown, FaEllipsisV, FaBook, FaCheckCircle, FaTrash } from 'react-icons/fa';
-import { MdAssignment } from 'react-icons/md';
+
 import { BsGripVertical } from 'react-icons/bs';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ModuleControlButtons from '../Modules/ModuleControlButtons';
-import { deleteAssignment} from './reducer';
+import { deleteAssignment, editAssignment, setAssigments} from './reducer';
 import GreenCheckmark from '../Modules/GreenCheckmark';
 import { useNavigate, useParams } from "react-router"; 
-
+import * as coursesClient from "../client";
+import * as assignmentClient from "./client";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export default function Assignments() {
@@ -18,13 +18,26 @@ export default function Assignments() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const CourseAssignments = assignments.filter((assignment: any) => assignment.course === cid) 
-
+    const [courseAssignments, setCourseAssignments] = useState<any[]>([]);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
     const [assignmentToDelete, setAssignmentToDelete] = useState<any>(null);
 
-    const handleNewAssignmentClick = () => {
-      navigate(`/Kanbas/Courses/${cid}/Assignments/new`); 
+
+
+    
+    const fetchCourseAssignments = async () => {
+      const assignmentsList = await coursesClient.findAssignmentsForCourse(cid as string);
+      dispatch(setAssigments(assignmentsList))
     };
+    useEffect(() => {
+      fetchCourseAssignments();
+    }, []);
+  
+    const removeAssignment = async (assignmentId: string) => {
+    await assignmentClient.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  } 
+  
 
     const handleDeleteClick = (assignment: any) => {
       setAssignmentToDelete(assignment);
@@ -33,7 +46,8 @@ export default function Assignments() {
 
     const handleConfirmDelete = () => {
       if (assignmentToDelete) {
-        dispatch(deleteAssignment(assignmentToDelete._id));
+        console.log(assignmentToDelete);
+        removeAssignment(assignmentToDelete._id);
         setShowDeleteDialog(false);
         setAssignmentToDelete(null);
       }

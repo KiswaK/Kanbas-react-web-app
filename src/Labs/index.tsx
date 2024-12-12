@@ -1,31 +1,28 @@
-import Lab1 from "./Lab1"
-import Lab2 from "./Lab2"
-import Lab3 from "./Lab3"
-import Lab4 from "./Lab4";
-import { Route, Routes, Navigate } from "react-router";
-import TOC from "./TOC";
-import { Provider } from "react-redux";
-import store from "./store";
+import EnvironmentVariables from "./Lab5/EnvironmentVariables";
+import HttpClient from "./Lab5/HttpClient";
+import PathParameters from "./Lab5/PathParameters";
+import QueryParameters from "./Lab5/QueryParameters";
+import WorkingWithArrays from "./Lab5/WorkingWithArrays";
+import WorkingWithObjects from "./Lab5/WorkingWithObjects";
+import WorkingWithObjectsAsynchronously from "./Lab5/WorkingWithObjectsAsynchronously";
 
-export default function Labs(){
-    return (
-      <Provider store={store}>
-      <div className="container-fluid"></div>
-      <div id="wd-labs">
-      <TOC/>
-      <Routes>
-        <Route path = "Lab1" element = {<Lab1></Lab1>} />
-        <Route path = "Lab2" element = {<Lab2></Lab2>} />
-        <Route path = "Lab3" element = {<Lab3></Lab3>} />
-        <Route path = "Lab4" element = {<Lab4></Lab4>} />
-      </Routes>
-       {/* <Lab1 />
-      <Lab2 />
-      <h2>Lab 3</h2>
-      <h2>Lab 4</h2>
-      <h2>Lab 5</h2> */}
-      </div>
-    </Provider>
+const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
+export default function Lab5() {
+  return (
+    <div id="wd-lab5">
+      <h2>Lab 5</h2>
+      <div className="list-group">
+        <a href={`${REMOTE_SERVER}/lab5/welcome`} className="list-group-item">
+          Welcome
+        </a>
+      </div><hr />
+      <EnvironmentVariables />
+      <PathParameters/>
+      <QueryParameters/>
+      <WorkingWithObjects/>
+      <WorkingWithArrays/>
+      <HttpClient/>
+      <WorkingWithObjectsAsynchronously/>
+    </div>
   );
 }
-
